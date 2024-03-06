@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/51a2ff743a.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<style>
+	.form-group span i{
+    color: seagreen;
+}
+
+</style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Student Management System</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/students}">Student Management</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+	<div class = "container">
+		<div class = "row">
+			<div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class = "text-center"> Create New Student </h1>
+				<div class = "card-body">
+					<form id="myForm" th:action="@{/students}" th:object = "${student}" method="POST">
+						<div class ="form-group">
+							<label> Student First Name </label>
+							<input id="fname"
+							type = "text"
+							name = "firstName"
+							th:field = "*{firstName}"
+							class = "form-control"
+							placeholder="Enter Student First Name" 
+							/>
+							<span style="color: red;" id="name-error"></span>
+						</div>
+						
+						<div class ="form-group">
+							<label> Student Last Name </label>
+							<input id="lname"
+							type = "text"
+							name = "lastName"
+							th:field = "*{lastName}"
+							class = "form-control"
+							placeholder="Enter Student Last Name" 
+							/>
+							<span style="color: red;" id="last-error"></span>
+						</div>
+						
+						<div class ="form-group">
+							<label> Student Email </label>
+							<input id="mail"
+							type = "email"
+							name = "email"
+							th:field = "*{email}"
+							class = "form-control"
+							placeholder="Enter Student Email" 
+							/>
+							<span style="color: red;" id="mail-error"></span>
+						</div>
+						
+						<div class = "box-footer">
+							<button id="sub" type="submit" class = "btn btn-primary">
+								Submit
+							</button>
+						</div>
+						<br><br>
+						<div class = "box-footer">
+							<button type="reset" class = "btn btn-primary">
+								Reset Data
+							</button>
+						</div>
+					</form>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+  let formEvent=document.getElementById("myForm");
+  let nameError=document.getElementById("name-error");
+  let lastError=document.getElementById("last-error");
+  let mailError=document.getElementById("mail-error");
+  let subm=document.getElementById("sub");
+  
+  subm.addEventListener("click",()=>{
+	  console.log("succefull");
+  })
+  
+  formEvent.addEventListener("submit", function(event) {
+    var username = document.getElementById("fname").value;
+    if (username.trim() === "") {
+	  nameError.innerHTML="field is required"
+	  event.preventDefault();	
+	  return false;
+    }       
+	  nameError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+	  return true;	
+    
+  });
+  
+  formEvent.addEventListener("submit", function(eve) {
+    var lastName = document.getElementById("lname").value;
+    if (lastName.trim() === "") {
+	  lastError.innerHTML="field is required"	
+      eve.preventDefault();
+      return false;
+    }
+    lastError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+	  return true;	
+  });
+  
+    formEvent.addEventListener("submit", function(ev) {
+    var Email = document.getElementById("mail").value;
+    if (Email.trim() === "") {
+	  mailError.innerHTML="field is required"
+      ev.preventDefault();
+      return false;
+    }
+    mailError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+	  return true;	
+  });
+  
+  
+</script>
+
+	
+</body>
+</html>
